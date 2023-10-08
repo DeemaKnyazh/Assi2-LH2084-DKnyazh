@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assi2_LH2084_DKnyazh.Data;
 using COMP2084_Assignment2_DmitryKnyazhevskiy.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
@@ -49,7 +50,7 @@ namespace Assi2_LH2084_DKnyazh.Controllers
         // GET: Campers/Create
         public IActionResult Create()
         {
-            ViewData["campSessionId"] = new SelectList(_context.CampSessions, "campSessionId", "campSessionId");
+            ViewData["campSessionId"] = new SelectList(_context.CampSessions, "campSessionId", "StartDate");
             ViewData["statusId"] = new SelectList(_context.Status, "statusId", "statusName");
             return View();
         }
@@ -65,10 +66,17 @@ namespace Assi2_LH2084_DKnyazh.Controllers
             {
                 _context.Add(camper);
                 await _context.SaveChangesAsync();
+                var result = _context.CampSessions.SingleOrDefault(a => a.campSessionId == camper.campSessionId);
+                if (result != null)
+                {
+                    result.numberCampers = result.numberCampers + 1;
+                    _context.SaveChanges();
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["campSessionId"] = new SelectList(_context.CampSessions, "campSessionId", "campSessionId", camper.campSessionId);
             ViewData["statusId"] = new SelectList(_context.Status, "statusId", "statusName", camper.statusId);
+            
             return View(camper);
         }
 
@@ -163,6 +171,12 @@ namespace Assi2_LH2084_DKnyazh.Controllers
             }
             
             await _context.SaveChangesAsync();
+            var result = _context.CampSessions.SingleOrDefault(a => a.campSessionId == camper.campSessionId);
+            if (result != null)
+            {
+                result.numberCampers = result.numberCampers - 1;
+                _context.SaveChanges();
+            }
             return RedirectToAction(nameof(Index));
         }
 

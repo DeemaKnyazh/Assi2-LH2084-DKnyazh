@@ -23,7 +23,7 @@ namespace COMP2084_Assignment2_DmitryKnyazhevskiy.Models
         public int age { get; set; }
 
         [Required]
-        [Display(Name = "Camp Session")]
+        [Display(Name = "Camp Session Start Date")]
         public int campSessionId { get; set; }
 
         public int? statusId { get; set; }
