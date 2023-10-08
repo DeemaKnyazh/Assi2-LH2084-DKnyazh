@@ -11,8 +11,8 @@ namespace Assi2_LH2084_DKnyazh.Data
             : base(options)
         {
         }
-        public DbSet<COMP2084_Assignment2_DmitryKnyazhevskiy.Models.Camper> Campers { get; set; } = default!;
+        public DbSet<Camper> Campers { get; set; } = default!;
         public DbSet<CampSession> CampSessions { get; set; } = default!;
-        public DbSet<Assi2_LH2084_DKnyazh.Models.Status> Status { get; set; } = default!;
+        public DbSet<Status> Status { get; set; } = default!;
     }
 }
