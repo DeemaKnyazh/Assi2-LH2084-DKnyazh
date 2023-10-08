@@ -7,6 +7,7 @@ namespace Assi2_LH2084_DKnyazh.Models
     {
         public int statusId {  get; set; }
         [Required]
+        [Display(Name = "Status")]
         public String statusName { get; set; }
         public List<Camper>? Campers { get; set; }
     }

@@ -19,6 +19,7 @@ namespace COMP2084_Assignment2_DmitryKnyazhevskiy.Models
 
         [Required]
         [Display(Name = "Age")]
+        [Range(0, 20)]
         public int age { get; set; }
 
         [Required]
