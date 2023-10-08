@@ -4,6 +4,7 @@ using Assi2_LH2084_DKnyazh.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assi2_LH2084_DKnyazh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231008172241_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,23 +24,6 @@ namespace Assi2_LH2084_DKnyazh.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Assi2_LH2084_DKnyazh.Models.Status", b =>
-                {
-                    b.Property<int>("statusId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("statusId"));
-
-                    b.Property<string>("statusName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("statusId");
-
-                    b.ToTable("Status");
-                });
 
             modelBuilder.Entity("COMP2084_Assignment2_DmitryKnyazhevskiy.Models.CampSession", b =>
                 {
@@ -88,14 +74,12 @@ namespace Assi2_LH2084_DKnyazh.Data.Migrations
                     b.Property<int>("campSessionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("statusId")
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("camperId");
 
                     b.HasIndex("campSessionId");
-
-                    b.HasIndex("statusId");
 
                     b.ToTable("Campers");
                 });
@@ -310,13 +294,7 @@ namespace Assi2_LH2084_DKnyazh.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Assi2_LH2084_DKnyazh.Models.Status", "Status")
-                        .WithMany("Campers")
-                        .HasForeignKey("statusId");
-
                     b.Navigation("CampSession");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -368,11 +346,6 @@ namespace Assi2_LH2084_DKnyazh.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Assi2_LH2084_DKnyazh.Models.Status", b =>
-                {
-                    b.Navigation("Campers");
                 });
 
             modelBuilder.Entity("COMP2084_Assignment2_DmitryKnyazhevskiy.Models.CampSession", b =>

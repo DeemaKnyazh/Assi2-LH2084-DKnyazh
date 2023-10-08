@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assi2_LH2084_DKnyazh.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace COMP2084_Assignment2_DmitryKnyazhevskiy.Models
 {
@@ -17,13 +18,18 @@ namespace COMP2084_Assignment2_DmitryKnyazhevskiy.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Age")]
         public int age { get; set; }
 
         [Required]
-        public int sessionId { get; set; }
+        [Display(Name = "Camp Session")]
+        public int campSessionId { get; set; }
 
-        [Required]
-        public int status { get; set; }
+        public int? statusId { get; set; }
+
+        public Status? Status { get; set; }
+
+        public CampSession? CampSession { get; set; }
 
     }
 }
