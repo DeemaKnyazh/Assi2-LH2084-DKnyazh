@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assi2_LH2084_DKnyazh.Data;
 using COMP2084_Assignment2_DmitryKnyazhevskiy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
+    [Authorize]
     public class CampSessionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +28,7 @@ namespace Assi2_LH2084_DKnyazh.Controllers
                           View(await _context.CampSessions.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.CampSessions'  is null.");
         }
-
+        [AllowAnonymous]
         // GET: CampSessions/Details/5
         public async Task<IActionResult> Details(int? id)
         {

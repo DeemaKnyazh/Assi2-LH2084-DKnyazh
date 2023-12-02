@@ -11,7 +11,7 @@ namespace Assi2_LH2084_DKnyazh.Data
             : base(options)
         {
         }
-        public DbSet<Camper> Campers { get; set; } = default!;
+            public DbSet<Camper> Campers { get; set; } = default!;
         public DbSet<CampSession> CampSessions { get; set; } = default!;
         public DbSet<Status> Status { get; set; } = default!;
     }

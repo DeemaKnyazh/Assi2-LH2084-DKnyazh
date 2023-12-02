@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
+    [Authorize]
     public class Administration : Controller
     {
         public IActionResult Index()

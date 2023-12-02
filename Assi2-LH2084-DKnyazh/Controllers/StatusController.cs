@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assi2_LH2084_DKnyazh.Data;
 using Assi2_LH2084_DKnyazh.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
+    [Authorize]
     public class StatusController : Controller
     {
         private readonly ApplicationDbContext _context;

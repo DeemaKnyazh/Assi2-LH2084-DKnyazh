@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Assi2_LH2084_DKnyazh.Data;
 using COMP2084_Assignment2_DmitryKnyazhevskiy.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
+    [Authorize]
     public class CampersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -47,6 +49,7 @@ namespace Assi2_LH2084_DKnyazh.Controllers
             return View(camper);
         }
 
+        [AllowAnonymous]
         // GET: Campers/Create
         public IActionResult Create()
         {
@@ -55,6 +58,7 @@ namespace Assi2_LH2084_DKnyazh.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         // POST: Campers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
