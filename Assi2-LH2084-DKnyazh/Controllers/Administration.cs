@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
+
     public class Administration : Controller
     {
         public IActionResult Index()

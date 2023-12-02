@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Assi2_LH2084_DKnyazh.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
+
     public class CampersController : Controller
     {
         private readonly ApplicationDbContext _context;
