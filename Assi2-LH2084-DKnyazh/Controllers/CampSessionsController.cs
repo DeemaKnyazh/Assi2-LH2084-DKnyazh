@@ -25,8 +25,8 @@ namespace Assi2_LH2084_DKnyazh.Controllers
         // GET: CampSessions
         public async Task<IActionResult> Index()
         {
-              return _context.CampSessions != null ? 
-                          View(await _context.CampSessions.ToListAsync()) :
+              return _context.CampSessions != null ?
+                          View("Index", await _context.CampSessions.OrderBy(c => c.campSessionId).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.CampSessions'  is null.");
         }
         [AllowAnonymous]
@@ -126,17 +126,18 @@ namespace Assi2_LH2084_DKnyazh.Controllers
         {
             if (id == null || _context.CampSessions == null)
             {
-                return NotFound();
+                //return NotFound();
+                return View("Error");
             }
 
             var campSession = await _context.CampSessions
                 .FirstOrDefaultAsync(m => m.campSessionId == id);
             if (campSession == null)
             {
-                return NotFound();
+                //return NotFound();
+                return View("Error");
             }
-
-            return View(campSession);
+            return View("Delete",campSession);
         }
 
         // POST: CampSessions/Delete/5
@@ -155,7 +156,7 @@ namespace Assi2_LH2084_DKnyazh.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index",nameof(Index));
         }
 
         private bool CampSessionExists(int id)
